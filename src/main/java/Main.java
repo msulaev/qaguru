@@ -20,7 +20,7 @@ public class Main {
 
 
         int g = b++;
-        if (g >+ 2) {
+        if (g >=+ 3) {
             System.out.println(g + " bigger or equals than 2");
         } else {
             System.out.println(g + " smaller than 2");
