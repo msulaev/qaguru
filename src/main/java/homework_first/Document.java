@@ -1,3 +1,5 @@
+package homework_first;
+
 public class Document {
     private int size;
     private String name;
@@ -41,7 +43,7 @@ public class Document {
 
     public void typeCheck() {
         if (!(this.type.equalsIgnoreCase("PDF"))) {
-            System.out.println("This type of Document doens't support");
+            System.out.println("This type of homework_first.Document doens't support");
         }
     }
 }
