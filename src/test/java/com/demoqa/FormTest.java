@@ -3,14 +3,14 @@ package com.demoqa;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.File;
 
 import static com.codeborne.selenide.Browsers.FIREFOX;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class FormTest {
 
@@ -18,7 +18,7 @@ public class FormTest {
     public static void setUp() {
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1920x1080";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.browser = FIREFOX;
         open("https://demoqa.com/automation-practice-form");
     }
@@ -36,12 +36,11 @@ public class FormTest {
                 "9",
                 "1993",
                 "September");
-
-        $("#firstName").sendKeys(user.getName());
-        $("#lastName").sendKeys(user.getLastName());
-        $("#userEmail").sendKeys(user.getEmail());
+        $("#firstName").setValue(user.getName());
+        $("#lastName").setValue(user.getLastName());
+        $("#userEmail").setValue(user.getEmail());
         $("[for=gender-radio-1]").as("Radio Button Male").click();
-        $("#userNumber").sendKeys(user.getPhoneNumber());
+        $("#userNumber").setValue(user.getPhoneNumber());
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption(user.getBirthMonth());
         $(".react-datepicker__year-select").selectOption(user.getBirthYear());
@@ -49,7 +48,7 @@ public class FormTest {
         $("#subjectsInput").setValue(user.getSubject()).pressEnter();
         $("[for=hobbies-checkbox-1]").as("Checkbox Sorts").click();
         $("#uploadPicture").uploadFile(new File("src/test/resources/token_1.png"));
-        $("#currentAddress").sendKeys(user.getCurrentAddress());
+        $("#currentAddress").setValue(user.getCurrentAddress());
         $(byText("Select State")).click();
         $(byText(user.getState())).click();
         $(byText("Select City")).click();
