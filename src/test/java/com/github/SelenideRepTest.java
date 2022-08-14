@@ -23,6 +23,5 @@ public class SelenideRepTest {
         $(".wiki-more-pages-link button").click();
         $("a[href*='/selenide/selenide/wiki/SoftAssertions']").click();
         $(".markdown-body").shouldHave(text("3. Using JUnit5 extend test class: "));
-
     }
 }

@@ -1,4 +1,4 @@
-package com.demoqa;
+package data;
 
 public class User {
     private String name;
