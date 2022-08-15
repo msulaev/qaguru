@@ -1,3 +1,5 @@
+import com.sun.javadoc.LanguageVersion
+
 plugins {
     id 'java-library'
 }
@@ -7,9 +9,15 @@ repositories {
 }
 
 dependencies {
-    testImplementation (
-            "com.codeborne:selenide:6.6.3",
-            "org.junit.jupiter:junit-jupiter:5.8.2")
+   implementation (
+            'com.codeborne:selenide:6.6.6',
+            'org.junit.jupiter:junit-jupiter:5.9.0',
+            'com.github.javafaker:javafaker:1.0.2')
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
 
 test {
