@@ -1,7 +1,7 @@
 package utils;
 
 public interface Constant {
-    String[] hobbies = {"Sports", "Reading", "Music"};
-    String[] subjects = {"Maths", "Physics", "Computer Science", "English"};
-    String[] genders = {"Male", "Female", "Other"};
+    String[] HOBBIES = {"Sports", "Reading", "Music"};
+    String[] SUBJECTS = {"Maths", "Physics", "Computer Science", "English"};
+    String[] GENDERS = {"Male", "Female", "Other"};
 }

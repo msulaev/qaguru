@@ -17,7 +17,7 @@ public class FormTest extends BaseTest {
             faker.name().firstName(),
             faker.name().lastName(),
             faker.numerify("##########"),
-            getRandom(subjects),
+            getRandom(SUBJECTS),
             faker.address().fullAddress(),
             "NCR",
             "Delhi",
@@ -25,8 +25,8 @@ public class FormTest extends BaseTest {
             getDate()[0],
             getDate()[2],
             getDate()[1],
-            getRandom(genders),
-            getRandom(hobbies)
+            getRandom(GENDERS),
+            getRandom(HOBBIES)
     );
     FormPage formPage = new FormPage(user);
 
