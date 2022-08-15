@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import pages.FormPage;
 
 import static data.User.getDate;
+import static utils.Constant.*;
+import static utils.Utils.getRandom;
 
 public class FormTest extends BaseTest {
     Faker faker = new Faker();
@@ -15,7 +17,7 @@ public class FormTest extends BaseTest {
             faker.name().firstName(),
             faker.name().lastName(),
             faker.numerify("##########"),
-            "Maths",
+            getRandom(subjects),
             faker.address().fullAddress(),
             "NCR",
             "Delhi",
@@ -23,7 +25,8 @@ public class FormTest extends BaseTest {
             getDate()[0],
             getDate()[2],
             getDate()[1],
-            "Radio Button Male"
+            getRandom(genders),
+            getRandom(hobbies)
     );
     FormPage formPage = new FormPage(user);
 

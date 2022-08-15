@@ -77,7 +77,7 @@ public class FormPage {
     }
 
     public FormPage checkHobby() {
-        $("[for=hobbies-checkbox-1]").as("Checkbox Sorts").click();
+        $("#hobbiesWrapper").$(byText(user.getHobby())).click();
         return this;
 
     }
@@ -102,7 +102,7 @@ public class FormPage {
     }
 
     public FormPage checkGender() {
-        $("[for=gender-radio-1]").as(user.getGender()).click();
+        $("#genterWrapper").$(byText(user.getGender())).click();
         return this;
 
     }
