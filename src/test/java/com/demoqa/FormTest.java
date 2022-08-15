@@ -1,35 +1,31 @@
 package com.demoqa;
 
-import com.codeborne.selenide.Configuration;
+import com.BaseTest;
+import com.github.javafaker.Faker;
 import data.User;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.FormPage;
 
-import static com.codeborne.selenide.Browsers.FIREFOX;
+import static data.User.getDate;
 
-public class FormTest {
-    User user = new User("Mikhail",
-            "Sulaev",
-            "1234567890",
+public class FormTest extends BaseTest {
+    Faker faker = new Faker();
+
+    User user = new User(
+            faker.name().firstName(),
+            faker.name().lastName(),
+            faker.numerify("##########"),
             "Maths",
-            "Cyprus Pafos",
+            faker.address().fullAddress(),
             "NCR",
             "Delhi",
-            "test@gmail.com",
-            "9",
-            "1993",
-            "September");
+            faker.internet().emailAddress(),
+            getDate()[0],
+            getDate()[2],
+            getDate()[1],
+            "Radio Button Male"
+    );
     FormPage formPage = new FormPage(user);
-
-
-    @BeforeAll
-    public static void setUp() {
-        Configuration.holdBrowserOpen = true;
-        Configuration.browserSize = "1920x1080";
-        Configuration.headless = false;
-        Configuration.browser = FIREFOX;
-    }
 
     @Test
     void formShoudBeCompleted() {
@@ -37,7 +33,7 @@ public class FormTest {
                 .setFirstName()
                 .setLastName()
                 .setEmail()
-                .checkGender("Radio Button Male")
+                .checkGender()
                 .setPhoneNumber()
                 .setBirthday()
                 .setSubject()
@@ -47,5 +43,4 @@ public class FormTest {
                 .clickToSubmit()
                 .checkResultsForm();
     }
-
 }
