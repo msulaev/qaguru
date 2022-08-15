@@ -1,5 +1,8 @@
 package data;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class User {
     private String name;
     private String lastName;
@@ -12,8 +15,9 @@ public class User {
     private String birthYear;
     private String birthMonth;
     private String city;
+    private String gender;
 
-    public User(String name, String lastName, String phoneNumber, String subject, String currentAddress, String stete, String city, String email, String birthDay, String birthYear, String birthMonth) {
+    public User(String name, String lastName, String phoneNumber, String subject, String currentAddress, String stete, String city, String email, String birthDay, String birthYear, String birthMonth, String gender) {
         this.name = name;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -25,6 +29,7 @@ public class User {
         this.birthDay = birthDay;
         this.birthYear = birthYear;
         this.birthMonth = birthMonth;
+        this.gender = gender;
     }
 
     public String getBirthDay() {
@@ -103,8 +108,8 @@ public class User {
         return state;
     }
 
-    public void setState(String stete) {
-        this.state = stete;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getCity() {
@@ -115,5 +120,11 @@ public class User {
         this.city = city;
     }
 
+    public static String[] getDate(){
+       return new SimpleDateFormat("dd/MMMM/yyyy").format(new Date()).split("/");
+    }
 
+    public String getGender(){
+        return gender;
+    }
 }
