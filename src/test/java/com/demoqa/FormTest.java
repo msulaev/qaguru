@@ -12,23 +12,23 @@ import static utils.Utils.getRandom;
 
 public class FormTest extends BaseTest {
     Faker faker = new Faker();
+    User user_2 = User.builder()
+            .name(faker.name().firstName())
+            .lastName(faker.name().lastName())
+            .phoneNumber(faker.numerify("##########"))
+            .subject(getRandom(SUBJECTS))
+            .currentAddress(faker.address().fullAddress())
+            .email(faker.internet().emailAddress())
+            .birthDay(getDate()[0])
+            .birthMonth(getDate()[1])
+            .birthYear(getDate()[2])
+            .gender(getRandom(GENDERS))
+            .hobby(getRandom(HOBBIES))
+            .state("NCR")
+            .city("Delhi")
+            .build();
 
-    User user = new User(
-            faker.name().firstName(),
-            faker.name().lastName(),
-            faker.numerify("##########"),
-            getRandom(SUBJECTS),
-            faker.address().fullAddress(),
-            "NCR",
-            "Delhi",
-            faker.internet().emailAddress(),
-            getDate()[0],
-            getDate()[2],
-            getDate()[1],
-            getRandom(GENDERS),
-            getRandom(HOBBIES)
-    );
-    FormPage formPage = new FormPage(user);
+    FormPage formPage = new FormPage(user_2);
 
     @Test
     void formShoudBeCompleted() {
