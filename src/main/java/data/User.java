@@ -16,8 +16,10 @@ public class User {
     private String birthMonth;
     private String city;
     private String gender;
+    private String hobby;
 
-    public User(String name, String lastName, String phoneNumber, String subject, String currentAddress, String stete, String city, String email, String birthDay, String birthYear, String birthMonth, String gender) {
+
+    public User(String name, String lastName, String phoneNumber, String subject, String currentAddress, String stete, String city, String email, String birthDay, String birthYear, String birthMonth, String gender, String hobby) {
         this.name = name;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -30,6 +32,7 @@ public class User {
         this.birthYear = birthYear;
         this.birthMonth = birthMonth;
         this.gender = gender;
+        this.hobby = hobby;
     }
 
     public String getBirthDay() {
@@ -126,5 +129,9 @@ public class User {
 
     public String getGender(){
         return gender;
+    }
+
+    public String getHobby() {
+        return hobby;
     }
 }
