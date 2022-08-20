@@ -1,16 +1,19 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.sun.tools.javac.util.List;
 import data.User;
 import elements.CalendarElement;
 
 import java.io.File;
 
+import static com.codeborne.selenide.CollectionCondition.texts;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 
 public class FormPage {
     private final SelenideElement resultModal = $(".modal-body"),
@@ -25,10 +28,8 @@ public class FormPage {
             userEmail = $("#userEmail"),
             lastName = $("#lastName"),
             firstName = $("#firstName");
-
-
     private final CalendarElement calendarElement = new CalendarElement();
-
+    ElementsCollection cities = $$(".css-11unzgr div");
 
     public FormPage open() {
         Selenide.open("https://demoqa.com/automation-practice-form");
@@ -51,19 +52,13 @@ public class FormPage {
                 text(user.getBirthMonth()));
     }
 
+    public void checkThatResultModalNotExist() {
+        resultModal.shouldNot(exist);
+    }
+
     public FormPage clickToSubmit() {
         submitBtn.click();
         return this;
-    }
-
-    public FormPage setAddress(String currentAddress, String state, String city) {
-        this.currentAddress.setValue(currentAddress);
-        this.state.click();
-        $(byText(state)).click();
-        this.city.click();
-        $(byText(city)).click();
-        return this;
-
     }
 
     public FormPage uploadPicture() {
@@ -78,8 +73,8 @@ public class FormPage {
 
     }
 
-    public FormPage setSubject(String subject) {
-        this.subject.setValue(subject).pressEnter();
+    public FormPage setSubject(String subj) {
+        subject.setValue(subj).pressEnter();
         return this;
 
     }
@@ -98,7 +93,11 @@ public class FormPage {
     }
 
     public FormPage checkGender(String gender) {
-        $("#genterWrapper").$(byText(gender)).click();
+        if (gender == null) {
+            return this;
+        } else {
+            $("#genterWrapper").$(byText(gender)).click();
+        }
         return this;
 
     }
@@ -108,8 +107,8 @@ public class FormPage {
         return this;
     }
 
-    public FormPage setLastName(String lastName) {
-        this.lastName.setValue(lastName);
+    public FormPage setLastName(String surname) {
+        lastName.setValue(surname);
         return this;
 
     }
@@ -118,5 +117,29 @@ public class FormPage {
         firstName.setValue(name);
         return this;
 
+    }
+
+    public FormPage setState(String stateName) {
+        state.click();
+        $(byText(stateName)).click();
+        return this;
+    }
+
+    public FormPage setCurrentAddress(String address) {
+        currentAddress.setValue(address);
+        return this;
+    }
+
+    public FormPage setCity(String cityName) {
+        city.click();
+        $(byText(cityName)).click();
+        return this;
+
+    }
+
+    public FormPage checkCities(List<String> stateName) {
+        city.click();
+        cities.shouldHave(texts(stateName));
+        return this;
     }
 }

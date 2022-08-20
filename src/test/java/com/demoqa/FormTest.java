@@ -27,11 +27,11 @@ public class FormTest extends BaseTest {
             .state("NCR")
             .city("Delhi")
             .build();
-
     FormPage formPage = new FormPage();
 
+
     @Test
-    void formShoudBeCompleted() {
+    void formShouldBeCompleted() {
         formPage.open()
                 .setFirstName(user.getName())
                 .setLastName(user.getLastName())
@@ -42,7 +42,9 @@ public class FormTest extends BaseTest {
                 .setSubject(user.getSubject())
                 .checkHobby(user.getHobby())
                 .uploadPicture()
-                .setAddress(user.getCurrentAddress(), user.getState(), user.getCity())
+                .setCurrentAddress(user.getCurrentAddress())
+                .setState(user.getState())
+                .setCity(user.getCity())
                 .clickToSubmit()
                 .checkResultsForm(user);
     }
