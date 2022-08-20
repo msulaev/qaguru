@@ -6,44 +6,46 @@ import data.User;
 import org.junit.jupiter.api.Test;
 import pages.FormPage;
 
-import static data.User.getDate;
 import static utils.Constant.*;
+import static utils.Utils.getDate;
 import static utils.Utils.getRandom;
 
 public class FormTest extends BaseTest {
     Faker faker = new Faker();
-    User user_2 = User.builder()
+    User user = User.builder()
             .name(faker.name().firstName())
             .lastName(faker.name().lastName())
             .phoneNumber(faker.numerify("##########"))
             .subject(getRandom(SUBJECTS))
             .currentAddress(faker.address().fullAddress())
             .email(faker.internet().emailAddress())
-            .birthDay(getDate()[0])
-            .birthMonth(getDate()[1])
-            .birthYear(getDate()[2])
+            .birthDay(getDate().get("day"))
+            .birthMonth(getDate().get("month"))
+            .birthYear(getDate().get("year"))
             .gender(getRandom(GENDERS))
             .hobby(getRandom(HOBBIES))
             .state("NCR")
             .city("Delhi")
             .build();
+    FormPage formPage = new FormPage();
 
-    FormPage formPage = new FormPage(user_2);
 
     @Test
-    void formShoudBeCompleted() {
+    void formShouldBeCompleted() {
         formPage.open()
-                .setFirstName()
-                .setLastName()
-                .setEmail()
-                .checkGender()
-                .setPhoneNumber()
-                .setBirthday()
-                .setSubject()
-                .checkHobby()
+                .setFirstName(user.getName())
+                .setLastName(user.getLastName())
+                .setEmail(user.getEmail())
+                .checkGender(user.getGender())
+                .setPhoneNumber(user.getPhoneNumber())
+                .setBirthday(user.getBirthDay(), user.getBirthYear(), user.getBirthMonth())
+                .setSubject(user.getSubject())
+                .checkHobby(user.getHobby())
                 .uploadPicture()
-                .setAdress()
+                .setCurrentAddress(user.getCurrentAddress())
+                .setState(user.getState())
+                .setCity(user.getCity())
                 .clickToSubmit()
-                .checkResultsForm();
+                .checkResultsForm(user);
     }
 }

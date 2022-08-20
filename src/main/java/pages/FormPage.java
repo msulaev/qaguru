@@ -1,16 +1,19 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.sun.tools.javac.util.List;
 import data.User;
 import elements.CalendarElement;
 
 import java.io.File;
 
+import static com.codeborne.selenide.CollectionCondition.texts;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 
 public class FormPage {
     private final SelenideElement resultModal = $(".modal-body"),
@@ -25,14 +28,8 @@ public class FormPage {
             userEmail = $("#userEmail"),
             lastName = $("#lastName"),
             firstName = $("#firstName");
-
-
     private final CalendarElement calendarElement = new CalendarElement();
-    User user;
-
-    public FormPage(User user) {
-        this.user = user;
-    }
+    ElementsCollection cities = $$(".css-11unzgr div");
 
     public FormPage open() {
         Selenide.open("https://demoqa.com/automation-practice-form");
@@ -41,7 +38,7 @@ public class FormPage {
         return this;
     }
 
-    public void checkResultsForm() {
+    public void checkResultsForm(User user) {
         resultModal.shouldHave(
                 text(user.getSubject()),
                 text(user.getEmail()),
@@ -52,22 +49,16 @@ public class FormPage {
                 text(user.getState()),
                 text(user.getPhoneNumber()),
                 text(user.getBirthYear()),
-                text(user.getBirthYear()));
+                text(user.getBirthMonth()));
+    }
+
+    public void checkThatResultModalNotExist() {
+        resultModal.shouldNot(exist);
     }
 
     public FormPage clickToSubmit() {
         submitBtn.click();
         return this;
-    }
-
-    public FormPage setAdress() {
-        currentAddress.setValue(user.getCurrentAddress());
-        state.click();
-        $(byText(user.getState())).click();
-        city.click();
-        $(byText(user.getCity())).click();
-        return this;
-
     }
 
     public FormPage uploadPicture() {
@@ -76,51 +67,79 @@ public class FormPage {
 
     }
 
-    public FormPage checkHobby() {
-        $("#hobbiesWrapper").$(byText(user.getHobby())).click();
+    public FormPage checkHobby(String hobby) {
+        $("#hobbiesWrapper").$(byText(hobby)).click();
         return this;
 
     }
 
-    public FormPage setSubject() {
-        subject.setValue(user.getSubject()).pressEnter();
+    public FormPage setSubject(String subj) {
+        subject.setValue(subj).pressEnter();
         return this;
 
     }
 
-    public FormPage setBirthday() {
+    public FormPage setBirthday(String birthDay, String birthYear, String birthMonth) {
         dateOfBirthInpt.click();
-        calendarElement.setDate(user.getBirthDay(), user.getBirthYear(), user.getBirthMonth());
+        calendarElement.setDate(birthDay, birthYear, birthMonth);
         return this;
 
     }
 
-    public FormPage setPhoneNumber() {
-        userNumber.setValue(user.getPhoneNumber());
+    public FormPage setPhoneNumber(String phoneNumber) {
+        userNumber.setValue(phoneNumber);
         return this;
 
     }
 
-    public FormPage checkGender() {
-        $("#genterWrapper").$(byText(user.getGender())).click();
+    public FormPage checkGender(String gender) {
+        if (gender == null) {
+            return this;
+        } else {
+            $("#genterWrapper").$(byText(gender)).click();
+        }
         return this;
 
     }
 
-    public FormPage setEmail() {
-        userEmail.setValue(user.getEmail());
+    public FormPage setEmail(String email) {
+        userEmail.setValue(email);
         return this;
     }
 
-    public FormPage setLastName() {
-        lastName.setValue(user.getLastName());
+    public FormPage setLastName(String surname) {
+        lastName.setValue(surname);
         return this;
 
     }
 
-    public FormPage setFirstName() {
-        firstName.setValue(user.getName());
+    public FormPage setFirstName(String name) {
+        firstName.setValue(name);
         return this;
 
+    }
+
+    public FormPage setState(String stateName) {
+        state.click();
+        $(byText(stateName)).click();
+        return this;
+    }
+
+    public FormPage setCurrentAddress(String address) {
+        currentAddress.setValue(address);
+        return this;
+    }
+
+    public FormPage setCity(String cityName) {
+        city.click();
+        $(byText(cityName)).click();
+        return this;
+
+    }
+
+    public FormPage checkCities(List<String> stateName) {
+        city.click();
+        cities.shouldHave(texts(stateName));
+        return this;
     }
 }

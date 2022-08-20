@@ -3,9 +3,6 @@ package data;
 import lombok.Builder;
 import lombok.Data;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 @Builder
 @Data
 public class User {
@@ -23,9 +20,5 @@ public class User {
     private String gender;
     private String hobby;
 
-
-    public static String[] getDate() {
-        return new SimpleDateFormat("dd/MMMM/yyyy").format(new Date()).split("/");
-    }
 
 }
