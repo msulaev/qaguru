@@ -14,7 +14,7 @@ import static com.codeborne.pdftest.assertj.Assertions.assertThat;
 public class FilesTest {
 
     @Test
-    void zipTest() throws Exception {
+    public void zipTest() throws Exception {
         ZipFile zipFile = new ZipFile(new File("src/test/resources/archive.zip"));
         zipFile.extractAll("out/test/resources");
 

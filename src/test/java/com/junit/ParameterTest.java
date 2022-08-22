@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class ParameterTest extends BaseTest {
     FormPage formPage = new FormPage();
 
-    static Stream<Arguments> dataProviderForAddress() {
+    public static Stream<Arguments> dataProviderForAddress() {
         return Stream.of(
                 Arguments.of("NCR", List.of("Delhi", "Gurgaon", "Noida")),
                 Arguments.of("Uttar Pradesh", List.of("Agra", "Lucknow", "Merrut")),
@@ -31,7 +31,7 @@ public class ParameterTest extends BaseTest {
             " ,  testLastName, , 1234567890",
             " , , , ,"
     })
-    void shouldNotSubmitForm(String name, String lastName, String gender, String phone) {
+    public void shouldNotSubmitForm(String name, String lastName, String gender, String phone) {
         formPage.open()
                 .setFirstName(name)
                 .setLastName(lastName)
@@ -43,7 +43,7 @@ public class ParameterTest extends BaseTest {
 
     @MethodSource("dataProviderForAddress")
     @ParameterizedTest
-    void checkListOfCitiesAfterSelectedState(String state, List<String> cities) {
+    public void checkListOfCitiesAfterSelectedState(String state, List<String> cities) {
         formPage.open()
                 .setState(state)
                 .checkCities(cities);
@@ -51,7 +51,7 @@ public class ParameterTest extends BaseTest {
 
     @ValueSource(strings = {"+987654321", "o987654321", " 98765432", "!@#$%^&*()"})
     @ParameterizedTest
-    void shouldNotPassIncorrectPhoneNumber(String invalidPhone) {
+    public void shouldNotPassIncorrectPhoneNumber(String invalidPhone) {
         formPage.open()
                 .setFirstName("ValidName")
                 .setLastName("ValidLastName")

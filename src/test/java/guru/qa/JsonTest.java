@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class JsonTest {
 
     @Test
-    void jsonShouldBeParsed() throws IOException {
+    public void jsonShouldBeParsed() throws IOException {
         ObjectMapper om = new ObjectMapper();
         Root root = om.readValue(new File("src/test/resources/example.json"), Root.class);
         assertThat(root.name).isEqualTo("Cake");
