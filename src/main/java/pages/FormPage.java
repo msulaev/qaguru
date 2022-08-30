@@ -3,11 +3,11 @@ package pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.sun.tools.javac.util.List;
 import data.User;
 import elements.CalendarElement;
 
 import java.io.File;
+import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.exist;
