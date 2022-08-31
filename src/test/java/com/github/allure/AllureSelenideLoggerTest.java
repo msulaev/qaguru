@@ -1,5 +1,6 @@
 package com.github.allure;
 
+import com.BaseTest;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +10,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class AllureSelenideLoggerTest {
+public class AllureSelenideLoggerTest extends BaseTest {
 
     @BeforeEach
     public void set() {

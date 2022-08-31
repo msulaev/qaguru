@@ -6,4 +6,5 @@ public interface Constant {
     String[] GENDERS = {"Male", "Female", "Other"};
     String URL = "https://github.com";
 
+
 }

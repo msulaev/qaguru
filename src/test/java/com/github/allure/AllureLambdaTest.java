@@ -1,6 +1,11 @@
 package com.github.allure;
 
+import com.BaseTest;
+import io.qameta.allure.Allure;
+import io.qameta.allure.model.Label;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -8,10 +13,12 @@ import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 import static utils.Constant.URL;
 
-public class AllureLambdaTest {
+public class AllureLambdaTest extends BaseTest {
 
     @Test
     public void shouldFindJunit5Example() {
+        Allure.getLifecycle().updateTestCase(t -> t.setLabels(List.of(new Label().setName("feature").setValue("etst"))));
+
         step("Open url: " + URL, () -> open(URL));
         step("Open selenide repository", () -> {
             $("[data-test-selector=nav-search-input]").setValue("selenide").pressEnter();
