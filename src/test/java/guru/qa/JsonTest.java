@@ -3,7 +3,6 @@ package guru.qa;
 import guru.qa.domain.Root;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -18,6 +17,5 @@ public class JsonTest {
         assertThat(root.name).isEqualTo("Cake");
         assertThat(root.batters.batter.get(0).id).isEqualTo("1001");
         assertThat(root.topping.get(0).id).isEqualTo("5001");
-
     }
 }
