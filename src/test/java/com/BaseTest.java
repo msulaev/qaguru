@@ -12,7 +12,7 @@ public class BaseTest {
 
     @BeforeAll
     static void configure() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+  //      SelenideLogger.addListener("AllureSelenide", new AllureSelenide().);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("browserName", "chrome");
