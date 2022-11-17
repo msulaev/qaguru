@@ -6,7 +6,9 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
+def allureVersion = "2.19.0";
+
+dependencies{
     implementation(
             'com.codeborne:selenide:6.7.3',
             'org.junit.jupiter:junit-jupiter:5.9.0',
@@ -21,7 +23,6 @@ dependencies {
             'io.qameta.allure:allure-selenide:2.19.0',
              'org.apache.poi:poi:3.9'
 
-
     )
     implementation 'com.fasterxml:jackson-xml-databind:0.6.2'
     testImplementation 'org.junit.platform:junit-platform-suite-engine:1.9.0'
@@ -32,14 +33,25 @@ dependencies {
 
 allure {
     report {
-        version.set("2.19.0")
+        version.set(allureVersion)
     }
     adapter {
         aspectjWeaver.set(true)
         frameworks {
             junit5 {
-                adapterVersion.set("2.19.0")
+                adapterVersion.set(allureVersion) //версия интеграции фреймворка и Allure
             }
+        }
+    }
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
         }
     }
 }
