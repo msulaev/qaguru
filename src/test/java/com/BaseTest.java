@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Browsers.CHROME;
 import static com.codeborne.selenide.Browsers.FIREFOX;
 
 public class BaseTest {
@@ -15,7 +16,7 @@ public class BaseTest {
         Configuration.holdBrowserOpen = false;
         Configuration.browserSize = "1920x1080";
         Configuration.headless = true;
-        Configuration.browser = FIREFOX;
+        Configuration.browser = CHROME;
 
     }
 
