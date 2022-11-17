@@ -17,22 +17,16 @@ public class BaseTest {
 
     @BeforeAll
     static void configure() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
-                .screenshots(true)
-                .savePageSource(true)
-                .enableLogs(LogType.BROWSER, Level.ALL)
-        );
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", System.getProperty("browse", "chrome"));
+        capabilities.setCapability("browserName", System.getProperty("browser", "chrome"));
         capabilities.setCapability("browserVersion", System.getProperty("version", "100.0"));
-        capabilities.setCapability("enableVNC", System.getProperty("enableVNC"));
-        capabilities.setCapability("enableVideo", System.getProperty("enableVideo"));
+        capabilities.setCapability("enableVNC", System.getProperty("enableVNC", "true"));
+        capabilities.setCapability("enableVideo", System.getProperty("enableVideo", "true"));
 
         Configuration.browserCapabilities = capabilities;
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = System.getProperty("resolution");
-        Configuration.remote = System.getProperty("remote");
     }
 
     @AfterEach
