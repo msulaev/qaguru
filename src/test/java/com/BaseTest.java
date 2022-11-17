@@ -3,13 +3,10 @@ package com;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import io.qameta.allure.selenide.LogType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.Attach;
-
-import static org.openqa.selenium.logging.LogType.BROWSER;
 
 
 public class BaseTest {
@@ -17,9 +14,6 @@ public class BaseTest {
     @BeforeAll
     static void configure() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
-                .screenshots(true)
-                .savePageSource(true)
-                .enableLogs(LogType.BROWSER, IN)
         );
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -31,7 +25,7 @@ public class BaseTest {
         Configuration.browserCapabilities = capabilities;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
-        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @AfterEach
