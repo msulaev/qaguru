@@ -21,8 +21,8 @@ dependencies{
             'org.assertj:assertj-core:3.23.1',
             'com.fasterxml.jackson.core:jackson-core:2.13.3',
             'io.qameta.allure:allure-selenide:2.19.0',
-             'org.apache.poi:poi:3.9'
-
+             'org.apache.poi:poi:3.9',
+             'org.aspectj:aspectjweaver:1.9.9.1'
     )
     implementation 'com.fasterxml:jackson-xml-databind:0.6.2'
     testImplementation 'org.junit.platform:junit-platform-suite-engine:1.9.0'

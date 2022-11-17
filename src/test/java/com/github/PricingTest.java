@@ -14,7 +14,6 @@ public class PricingTest {
 
     @Test
     public void shouldOpenPricingPlan(){
-        Configuration.timeout =
         open("https://github.com");
         $(byText("Pricing")).hover();
         $(byText("Compare plans")).click();
