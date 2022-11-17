@@ -1,23 +1,36 @@
 package com;
 
 import com.codeborne.selenide.Configuration;
-import io.qameta.allure.Allure;
-import io.qameta.allure.model.Label;
-import org.junit.jupiter.api.BeforeEach;
-
-import java.util.List;
-
-import static com.codeborne.selenide.Browsers.CHROME;
-import static com.codeborne.selenide.Browsers.FIREFOX;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.Attach;
 
 public class BaseTest {
-    @BeforeEach
-    public void setUp() {
-        Configuration.holdBrowserOpen = false;
-        Configuration.browserSize = "1920x1080";
-        Configuration.headless = true;
-        Configuration.browser = CHROME;
 
+    @BeforeAll
+    static void configure() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserName", "chrome");
+        capabilities.setCapability("browserVersion", "100.0");
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+
+        Configuration.browserCapabilities = capabilities;
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = "1920x1080";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
+    @AfterEach
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+    }
 }
