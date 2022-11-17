@@ -1,3 +1,4 @@
+import com.demoqa.FormTest;
 import guru.qa.FileTest;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
