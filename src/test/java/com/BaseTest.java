@@ -19,13 +19,14 @@ public class BaseTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("browserName", System.getProperty("browser", "chrome"));
         capabilities.setCapability("browserVersion", System.getProperty("version", "100.0"));
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-
+        if (System.getProperty("remote") != null) {
+            capabilities.setCapability("enableVNC", true);
+            capabilities.setCapability("enableVideo", true);
+        }
         Configuration.browserCapabilities = capabilities;
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = System.getProperty("size","1920x1080");
-        Configuration.remote = System.getProperty("remote", null );
+        Configuration.browserSize = System.getProperty("size", "1920x1080");
+        Configuration.remote = System.getProperty("remote", null);
     }
 
     @AfterEach
