@@ -34,6 +34,8 @@ public class BaseTest {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
-        Attach.addVideo();
+        if (System.getProperty("remote") != null) {
+            Attach.addVideo();
+        }
     }
 }
