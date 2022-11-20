@@ -58,6 +58,8 @@ tasks.withType(Test) {
 
 
 test {
+    systemProperties(System.getProperties())
+
     useJUnitPlatform{
         include '**/AllTests.class'
     }
